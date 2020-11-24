@@ -9,11 +9,13 @@ void main() => runApp(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
       ),
-      body: Column(
-        children: [
-          Text('Corpo do Scaffold'),
-        ],
-      ),
+      body: Card(
+        child: ListTile(
+          leading: Icon(Icons.monetization_on),
+          title: Text('1500.0'),
+          subtitle: Text('Conta: 123-4'),
+        )
+       ),
     ),
   )
 );
