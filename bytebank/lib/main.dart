@@ -1,47 +1,61 @@
 import 'package:flutter/material.dart';
 
-void main() =>
-    runApp(
-      MaterialApp(
-          home: Scaffold(
-              appBar: AppBar(
-                title: Text('Transferencias'),
-              ),
-              floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.add),
-              ),
-              body: listaDeTransferencia()
-          ),
-),
+void main() => runApp(ByteBank());
+
+class ByteBank extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return (MaterialApp(home: FormularioDeTransferencia()));
+  }
+}
+
+class FormularioDeTransferencia extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Formulario de transferencia'),
+      ),
+      body: Column(
+        children: [ItemDeTransferencia(Transferencia(123, 1800.0))],
+      ),
     );
+  }
+}
 
-class iTemDeTransferencia extends StatelessWidget {
-  String valor;
-  String conta;
+class ItemDeTransferencia extends StatelessWidget {
+  Transferencia transferencia;
 
-  iTemDeTransferencia(this.valor, this.conta);
+  ItemDeTransferencia(this.transferencia);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text('3500.0'),
-        subtitle: Text('Conta: 333-4'),
+        title: Text(transferencia.valor.toString()),
+        subtitle: Text(transferencia.conta.toString()),
       ),
     );
   }
 }
 
-class listaDeTransferencia extends StatelessWidget {
+class ListaDeTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        iTemDeTransferencia('1500.0', '456-9'),
-        iTemDeTransferencia('2500.0', '3545-0'),
-        iTemDeTransferencia('1200.0', '7852-0'),
+        ItemDeTransferencia(Transferencia(456 - 9, 1500.0)),
+        ItemDeTransferencia(Transferencia(3545 - 0, 2500.0)),
+        ItemDeTransferencia(Transferencia(7852 - 0, 1200.0)),
       ],
     );
   }
+}
+
+class Transferencia {
+  int conta;
+  double valor;
+
+  Transferencia(this.conta, this.valor);
 }
