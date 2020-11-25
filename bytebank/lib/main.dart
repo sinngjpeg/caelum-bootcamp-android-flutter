@@ -11,6 +11,7 @@ class ByteBank extends StatelessWidget {
 
 ///////// FORMULARIO DE TRANSFERENCIA
 class FormularioDeTransferencia extends StatelessWidget {
+
   final TextEditingController controladorDoCampoConta = TextEditingController();
   final TextEditingController controladorDoCampoValor = TextEditingController();
 
@@ -34,16 +35,17 @@ class FormularioDeTransferencia extends StatelessWidget {
     );
   } //Build
 
-  void criaTransferencia(){
-  debugPrint('Clicou em ADICIONAR');
+  void criaTransferencia(BuildContext context){
+    debugPrint('Clicou em ADICIONAR');
 
-  int conta = int.tryParse(controladorDoCampoConta.text);
-  double valor = double.tryParse(controladorDoCampoValor.text);
+    int conta = int.tryParse(controladorDoCampoConta.text);
+    double valor = double.tryParse(controladorDoCampoValor.text);
 
-  if (conta != null && valor != null) {
-  final transferenciaCriada = Transferencia(conta, valor);
-  debugPrint('Transferencia Criada: $transferenciaCriada');
-  }
+    if (conta != null && valor != null) {
+    final transferenciaCriada = Transferencia(conta, valor);
+    debugPrint('Transferencia Criada: $transferenciaCriada');
+    Navigator.pop(context, transferenciaCriada);
+    }
   }
 }
 
@@ -109,9 +111,13 @@ class ListaDeTransferencia extends StatelessWidget {
     ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add), onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+         final Future<Transferencia> future  = Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormularioDeTransferencia();
         }));
+         future.then((transferenciaRecebida) {
+           debugPrint('chegou no then do future');
+           debugPrint('$transferenciaRecebida');
+         });
       },
       ),
     );
