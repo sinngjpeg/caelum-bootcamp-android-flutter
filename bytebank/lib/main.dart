@@ -5,7 +5,7 @@ void main() => runApp(ByteBank());
 class ByteBank extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return (MaterialApp(home: FormularioDeTransferencia()));
+    return (MaterialApp(home: ListaDeTransferencia()));
   }
 }
 
@@ -95,12 +95,25 @@ class ItemDeTransferencia extends StatelessWidget {
 class ListaDeTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+      appBar : AppBar(
+        title: Text('Esqueci'),
+      ),
+      body: Column(
       children: [
         ItemDeTransferencia(Transferencia(456 - 9, 1500.0)),
         ItemDeTransferencia(Transferencia(3545 - 0, 2500.0)),
         ItemDeTransferencia(Transferencia(7852 - 0, 1200.0)),
+
       ],
+    ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add), onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormularioDeTransferencia();
+        }));
+      },
+      ),
     );
   }
 }
