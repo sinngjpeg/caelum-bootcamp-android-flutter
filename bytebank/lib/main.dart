@@ -10,6 +10,9 @@ class ByteBank extends StatelessWidget {
 }
 
 class FormularioDeTransferencia extends StatelessWidget {
+  final TextEditingController controladorDoCampoConta = TextEditingController();
+  final TextEditingController controladorDoCampoValor = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,33 +22,41 @@ class FormularioDeTransferencia extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding : const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              fontSize: 24.8
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: TextField(
+              controller: controladorDoCampoConta,
+              keyboardType: TextInputType.number,
+              style: TextStyle(fontSize: 24.8),
+              decoration: InputDecoration(
+                  labelText: 'Numero da conta', hintText: '0000'),
             ),
-            decoration: InputDecoration(
-              labelText: 'Numero da conta',
-              hintText: '0000'
-            ),
-          ),
           ),
           Padding(
-            padding : const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.8),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.8),
             child: TextField(
+              controller: controladorDoCampoValor,
               keyboardType: TextInputType.number,
-              style: TextStyle(
-                  fontSize: 24.8
-              ),
+              style: TextStyle(fontSize: 24.0),
               decoration: InputDecoration(
-                icon: Icon(Icons.monetization_on),
+                  icon: Icon(Icons.monetization_on),
                   labelText: 'Valor',
-                  hintText: '0.00'
-              ),
+                  hintText: '0.00'),
             ),
           ),
           RaisedButton(
+            onPressed: () { //lambda
+              debugPrint('Clicou em ADICIONAR');
+              
+              int conta = int.tryParse(controladorDoCampoConta.text);
+              double valor = double.tryParse(controladorDoCampoValor.text);
+
+              if (conta != null && valor != null) {
+                final transferenciaCriada = Transferencia(conta, valor);
+                debugPrint('Transferencia Criada: $transferenciaCriada');
+              }
+            },
             child: Text('Adicionar'),
           )
         ],
@@ -87,6 +98,10 @@ class ListaDeTransferencia extends StatelessWidget {
 class Transferencia {
   int conta;
   double valor;
-
   Transferencia(this.conta, this.valor);
+
+  @override
+  String toString() {
+    return 'Transferencia{conta: $conta, valor: $valor}';
+  }
 }
