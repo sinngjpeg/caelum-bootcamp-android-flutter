@@ -9,6 +9,7 @@ class ByteBank extends StatelessWidget {
   }
 }
 
+///////// FORMULARIO DE TRANSFERENCIA
 class FormularioDeTransferencia extends StatelessWidget {
   final TextEditingController controladorDoCampoConta = TextEditingController();
   final TextEditingController controladorDoCampoValor = TextEditingController();
@@ -25,22 +26,24 @@ class FormularioDeTransferencia extends StatelessWidget {
           CampoTexto(controladorDoCampoValor, 'Valor', '0.00', icone: Icons.monetization_on),
 
           RaisedButton(
-            onPressed: () { //lambda
-              debugPrint('Clicou em ADICIONAR');
-
-              int conta = int.tryParse(controladorDoCampoConta.text);
-              double valor = double.tryParse(controladorDoCampoValor.text);
-
-              if (conta != null && valor != null) {
-                final transferenciaCriada = Transferencia(conta, valor);
-                debugPrint('Transferencia Criada: $transferenciaCriada');
-              }
-            },
-            child: Text('Adicionar'),
+            onPressed: () => criaTransferencia(),
+              child: Text('Adicionar'),
           )
         ],
       ),
     );
+  } //Build
+
+  void criaTransferencia(){
+  debugPrint('Clicou em ADICIONAR');
+
+  int conta = int.tryParse(controladorDoCampoConta.text);
+  double valor = double.tryParse(controladorDoCampoValor.text);
+
+  if (conta != null && valor != null) {
+  final transferenciaCriada = Transferencia(conta, valor);
+  debugPrint('Transferencia Criada: $transferenciaCriada');
+  }
   }
 }
 
