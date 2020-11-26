@@ -27,8 +27,8 @@ class FormularioDeTransferencia extends StatelessWidget {
           CampoTexto(controladorDoCampoValor, 'Valor', '0.00', icone: Icons.monetization_on),
 
           RaisedButton(
-            onPressed: () => criaTransferencia(),
-              child: Text('Adicionar'),
+           child: Text('Adicionar'),
+            onPressed: () => criaTransferencia(context),
           )
         ],
       ),
@@ -45,6 +45,7 @@ class FormularioDeTransferencia extends StatelessWidget {
     final transferenciaCriada = Transferencia(conta, valor);
     debugPrint('Transferencia Criada: $transferenciaCriada');
     Navigator.pop(context, transferenciaCriada);
+
     }
   }
 }
@@ -95,19 +96,25 @@ class ItemDeTransferencia extends StatelessWidget {
 }
 
 class ListaDeTransferencia extends StatelessWidget {
+
+  final List<Transferencia> transferencias = List();
+
   @override
   Widget build(BuildContext context) {
+    transferencias.add(Transferencia(123, 100.0));
+    transferencias.add(Transferencia(123, 200.0));
+    transferencias.add(Transferencia(123, 300.0));
+
     return Scaffold(
       appBar : AppBar(
-        title: Text('Esqueci'),
+        title: Text('Transferencias'),
       ),
-      body: Column(
-      children: [
-        ItemDeTransferencia(Transferencia(456 - 9, 1500.0)),
-        ItemDeTransferencia(Transferencia(3545 - 0, 2500.0)),
-        ItemDeTransferencia(Transferencia(7852 - 0, 1200.0)),
-
-      ],
+      body: ListView.builder(
+        itemCount: transferencias.length,
+        itemBuilder: (BuildContext context, int index) {
+        final Transferencia transferencia = transferencias[index];
+        return ItemDeTransferencia(transferencia);
+        },
     ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add), onPressed: () {
@@ -115,8 +122,8 @@ class ListaDeTransferencia extends StatelessWidget {
             return FormularioDeTransferencia();
         }));
          future.then((transferenciaRecebida) {
-           debugPrint('chegou no then do future');
-           debugPrint('$transferenciaRecebida');
+           debugPrint('chegou no then do future: $transferenciaRecebida');
+            transferencias.add(transferenciaRecebida);
          });
       },
       ),
