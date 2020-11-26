@@ -10,29 +10,37 @@ class ByteBank extends StatelessWidget {
 }
 
 ///////// FORMULARIO DE TRANSFERENCIA
-class FormularioDeTransferencia extends StatelessWidget {
+class FormularioDeTransferencia extends StatefulWidget {
+  @override
+  FormularioDeTransferenciaState createState() =>
+      FormularioDeTransferenciaState();
+}
+
+class FormularioDeTransferenciaState extends State<FormularioDeTransferencia> {
   final TextEditingController controladorDoCampoConta = TextEditingController();
+
   final TextEditingController controladorDoCampoValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Criando transferencia'),
-      ),
-      body: Column(
-        children: [
-          CampoTexto(controladorDoCampoConta, 'Número da conta', '0000'),
-          CampoTexto(controladorDoCampoValor, 'Valor', '0.00',
-              icone: Icons.monetization_on),
-          RaisedButton(
-            child: Text('Adicionar'),
-            onPressed: () => criaTransferencia(context),
-          )
-        ],
-      ),
-    );
-  } //Build
+        appBar: AppBar(
+          title: Text('Criando transferencia'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              CampoTexto(controladorDoCampoConta, 'Número da conta', '0000'),
+              CampoTexto(controladorDoCampoValor, 'Valor', '0.00',
+                  icone: Icons.monetization_on),
+              RaisedButton(
+                child: Text('Adicionar'),
+                onPressed: () => criaTransferencia(context),
+              )
+            ],
+          ),
+        ));
+  }
 
   void criaTransferencia(BuildContext context) {
     debugPrint('Clicou em ADICIONAR');
@@ -121,12 +129,17 @@ class ListaDeTransferenciaState extends State<ListaDeTransferencia> {
             return FormularioDeTransferencia();
           }));
           future.then((transferenciaRecebida) {
-            debugPrint('chegou no then do future: $transferenciaRecebida');
-            setState(() {
-              widget.transferencias.add(transferenciaRecebida);
-              debugPrint('Lista atualizada: ' +
-                  widget.transferencias.length.toString());
-            });
+            if (transferenciaRecebida != null) {
+              debugPrint('chegou no then do future: $transferenciaRecebida');
+
+              Future.delayed(Duration(seconds: 5)).then((value) {
+                setState(() {
+                  widget.transferencias.add(transferenciaRecebida);
+                  debugPrint('Lista atualizada: ' +
+                      widget.transferencias.length.toString());
+                });
+              });
+            }
           });
         },
       ),
