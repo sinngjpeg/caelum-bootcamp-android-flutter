@@ -11,34 +11,47 @@ void main() => runApp(MaterialApp(
       ),
     )));
 
+/////////////////// LISTA DE TRANSFERENCIA
+
 class ListaTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        item_tranferencia('1000', '1020'),
-        item_tranferencia('2000', '1020'),
-        item_tranferencia('3000', '1030'),
-        item_tranferencia('4000', '1040'),
+        item_tranferencia(Transferencia(1000, 1010)),
+        item_tranferencia(Transferencia(2000, 1020)),
+        item_tranferencia(Transferencia(3000, 1030)),
       ],
     );
   }
 }
 
-class item_tranferencia extends StatelessWidget {
-  final String valor;
-  final String numeroConta;
+//////////////ITEM TRANSFERENCIA
 
-  item_tranferencia(this.valor, this.numeroConta);
+class item_tranferencia extends StatelessWidget {
+  final Transferencia transferencia;
+
+  item_tranferencia(this.transferencia);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text(valor),
-        subtitle: Text(numeroConta),
+        title: Text(transferencia.valor.toString()),
+        subtitle: Text(transferencia.numeroConta.toString()),
       ),
     );
   }
+}
+
+//////////// TRANSFERENCIA
+
+class Transferencia {
+  final double valor;
+  final int numeroConta;
+
+  Transferencia(this.valor, this.numeroConta);
+
+
 }
