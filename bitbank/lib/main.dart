@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(Column(
-      children: <Widget>[
-        Text('Deliver features faster', textDirection: TextDirection.ltr,),
-        Text('?', textDirection: TextDirection.ltr),
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.contain, // otherwise the logo will be tiny
-            child: const FlutterLogo(),
-          ),
-        ),
-      ],
-    ));
+void main() => runApp(MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(
+        title: Text('Transferencia'),
+      ),
 
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+          ),
+    )));
