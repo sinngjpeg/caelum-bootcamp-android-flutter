@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(Text('Bem vindo ao BitBank', textDirection: TextDirection.ltr ,));
+void main() => runApp(Column(
+      children: <Widget>[
+        Text('Deliver features faster', textDirection: TextDirection.ltr,),
+        Text('?', textDirection: TextDirection.ltr),
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.contain, // otherwise the logo will be tiny
+            child: const FlutterLogo(),
+          ),
+        ),
+      ],
+    ));
 
