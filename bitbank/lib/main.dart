@@ -17,7 +17,18 @@ class BitBankApp extends StatelessWidget {
 class FormularioTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Criando Transferencia'),
+      ),
+      body: Column(
+        children: <Widget>[
+          TextField(),
+          TextField(),
+          RaisedButton(onPressed: null)
+        ],
+      ),
+    );
   }
 }
 
