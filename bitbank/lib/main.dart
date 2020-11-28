@@ -27,6 +27,8 @@ class FormularioTransferencia extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
+          Editor(_controladorCampoNumeroConta, 'Numero da Conta', '0000'),
+          Editor((_controladorCampoValor), 'Valor', '0000'),
           RaisedButton(
               child: Text('Confirmar'),
               onPressed: () {
