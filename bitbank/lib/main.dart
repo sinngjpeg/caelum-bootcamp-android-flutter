@@ -51,6 +51,10 @@ class FormularioTransferencia extends StatelessWidget {
             child: Text('Confirmar'),
             onPressed: () {
               debugPrint('Clicou no confirmar');
+              final int numeroConta =
+                  int.tryParse(_controladorCampoNumeroConta.text);
+              final double valor = double.tryParse(_controladorCampoValor.text);
+              Transferencia(valor, numeroConta);
             },
           )
         ],
