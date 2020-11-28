@@ -48,15 +48,18 @@ class FormularioTransferencia extends StatelessWidget {
                 keyboardType: TextInputType.number,
               )),
           RaisedButton(
-            child: Text('Confirmar'),
-            onPressed: () {
-              debugPrint('Clicou no confirmar');
-              final int numeroConta =
-                  int.tryParse(_controladorCampoNumeroConta.text);
-              final double valor = double.tryParse(_controladorCampoValor.text);
-              Transferencia(valor, numeroConta);
-            },
-          )
+              child: Text('Confirmar'),
+              onPressed: () {
+                debugPrint('Clicou no confirmar');
+                final int numeroConta =
+                    int.tryParse(_controladorCampoNumeroConta.text);
+                final double valor =
+                    double.tryParse(_controladorCampoValor.text);
+                if (numeroConta != null && valor != null) {
+                  final transferenciaCriada = Transferencia(valor, numeroConta);
+                  debugPrint('$transferenciaCriada');
+                }
+              })
         ],
       ),
     );
@@ -112,4 +115,9 @@ class Transferencia {
   final int numeroConta;
 
   Transferencia(this.valor, this.numeroConta);
+
+  @override
+  String toString() {
+    return 'Transferencia{valor: $valor, numeroConta: $numeroConta}';
+  }
 }
