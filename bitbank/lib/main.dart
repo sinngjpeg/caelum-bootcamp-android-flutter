@@ -27,26 +27,6 @@ class FormularioTransferencia extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _controladorCampoNumeroConta,
-                style: TextStyle(fontSize: 24.0),
-                decoration: InputDecoration(
-                    labelText: 'Número da conta', hintText: '0000'),
-                keyboardType: TextInputType.number,
-              )),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _controladorCampoValor,
-                style: TextStyle(fontSize: 24.0),
-                decoration: InputDecoration(
-                    icon: Icon(Icons.monetization_on),
-                    labelText: 'Valor',
-                    hintText: '0000'),
-                keyboardType: TextInputType.number,
-              )),
           RaisedButton(
               child: Text('Confirmar'),
               onPressed: () {
@@ -66,7 +46,26 @@ class FormularioTransferencia extends StatelessWidget {
   }
 }
 
-/////////////////// LISTA DE TRANSFERENCIA
+class Editor extends StatelessWidget {
+  final TextEditingController _controlador;
+  final String _rotulo;
+  final String _dica;
+
+  Editor(this._controlador, this._rotulo, this._dica);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextField(
+          controller: _controlador,
+          style: TextStyle(fontSize: 24.0),
+          decoration: InputDecoration(labelText: _rotulo, hintText: _dica),
+          keyboardType: TextInputType.number,
+        ));
+  }
+}
+/////////// LISTA DE TRANSFERENCIA
 
 class ListaTransferencia extends StatelessWidget {
   @override
