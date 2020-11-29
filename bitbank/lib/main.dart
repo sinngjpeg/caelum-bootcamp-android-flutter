@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(BitBankApp());
@@ -86,18 +85,20 @@ class Editor extends StatelessWidget {
 /////////// LISTA DE TRANSFERENCIA
 
 class ListaTransferencia extends StatelessWidget {
+  final List<Transferencia> _transferencia = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Transferencia'),
       ),
-      body: Column(
-        children: <Widget>[
-          item_tranferencia(Transferencia(1000, 1010)),
-          item_tranferencia(Transferencia(2000, 1020)),
-          item_tranferencia(Transferencia(3000, 1030)),
-        ],
+      body: ListView.builder(
+        itemCount: _transferencia.length,
+        itemBuilder: (context, indice) {
+          final transferencia = _transferencia[indice];
+          return item_tranferencia(transferencia);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -109,6 +110,7 @@ class ListaTransferencia extends StatelessWidget {
           future.then((transferenciaRecebida) {
             debugPrint('chegou no then do future');
             debugPrint('$transferenciaRecebida');
+            _transferencia.add(transferenciaRecebida);
           });
         },
       ),
