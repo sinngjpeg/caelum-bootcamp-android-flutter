@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'formulario_transferencia.dart';
 
+const _tituloAppBar = 'Transferencia';
+
 class ListaTransferencias extends StatefulWidget {
   final List<Transferencia> _transferencias = List();
 
@@ -17,7 +19,7 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transferencia'),
+        title: Text(_tituloAppBar),
       ),
       body: ListView.builder(
         itemCount: widget._transferencias.length,
@@ -31,18 +33,17 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormularioTransferencia();
-          })).then(
-            (transferenciaRecebida) => _atualiza(transferenciaRecebida),
+             })).then(
+             (transferenciaRecebida) => _atualiza(transferenciaRecebida),
           );
         },
       ),
     );
   }
 
-  // UTILIZADO PARA ATUALIZAR A PAGINA DE TRANSFERENCIA DEPOIS QUE INCLIDO A INFORMAÇÃO NA TELA DE NOVA TRANSFERENCIA.
   void _atualiza(Transferencia transferenciaRecebida) {
     if (transferenciaRecebida != null) {
-      setState(() {
+        setState(() {
         widget._transferencias.add(transferenciaRecebida);
       });
     }
@@ -58,9 +59,9 @@ class ItemTransferencia extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Icon(Icons.monetization_on),
-      title: Text(_transferencia.valor.toString()),
-      subtitle: Text(_transferencia.numeroConta.toString()),
+           leading: Icon(Icons.monetization_on),
+           title: Text(_transferencia.valor.toString()),
+         subtitle: Text(_transferencia.numeroConta.toString()),
     ));
   }
 }

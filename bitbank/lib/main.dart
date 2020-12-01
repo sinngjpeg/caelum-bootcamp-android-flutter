@@ -1,11 +1,14 @@
 import 'package:bitbank/screens/lista_transferencia.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(BytebankApp());
+void main() => runApp(BitbankApp());
 
-class BytebankApp extends StatelessWidget {
+class BitbankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(), home: ListaTransferencias());
+    return MaterialApp(
+        theme: ThemeData.dark(),
+        home: ListaTransferencias()
+    );
   }
 }
