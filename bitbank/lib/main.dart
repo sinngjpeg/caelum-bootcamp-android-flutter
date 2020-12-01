@@ -13,7 +13,7 @@ class BytebankApp extends StatelessWidget {
   }
 }
 
-class FormularioTransferencia extends StatefulWidget {
+class FormularioTransferencia extends StatelessWidget {
   final TextEditingController _controladorCampoNumeroConta =
       TextEditingController();
   final TextEditingController _controladorCampoValor = TextEditingController();
@@ -95,13 +95,9 @@ class ListaTransferencias extends StatefulWidget {
 class ListaTransferenciasState extends State<ListaTransferencias> {
   @override
   Widget build(BuildContext context) {
-    widget._transferencias.add(Transferencia(100.0, 1000));
-    widget._transferencias.add(Transferencia(100.0, 1000));
-    widget._transferencias.add(Transferencia(100.0, 1000));
-    widget._transferencias.add(Transferencia(100.0, 1000));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transferências'),
+        title: Text('Transferencia'),
       ),
       body: ListView.builder(
         itemCount: widget._transferencias.length,
@@ -113,18 +109,23 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Transferencia> future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormularioTransferencia();
-          }));
-          future.then((transferenciaRecebida) {
-            debugPrint('chegou no then do future');
-            debugPrint('$transferenciaRecebida');
-            widget._transferencias.add(transferenciaRecebida);
-          });
+          })).then(
+            (transferenciaRecebida) => _atualiza(transferenciaRecebida),
+          );
         },
       ),
     );
+  }
+
+  // UTILIZADO PARA ATUALIZAR A PAGINA DE TRANSFERENCIA DEPOIS QUE INCLIDO A INFORMAÇÃO NA TELA DE NOVA TRANSFERENCIA.
+  void _atualiza(Transferencia transferenciaRecebida) {
+    if (transferenciaRecebida != null) {
+      setState(() {
+        widget._transferencias.add(transferenciaRecebida);
+      });
+    }
   }
 }
 
