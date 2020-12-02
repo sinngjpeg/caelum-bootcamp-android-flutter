@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(BitBankApp());
 }
 
-class MyApp extends StatelessWidget {
+class BitBankApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo', home: MyApp());
+    return MaterialApp(
+        home: Scaffold(
+        appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+    ));
   }
 }
