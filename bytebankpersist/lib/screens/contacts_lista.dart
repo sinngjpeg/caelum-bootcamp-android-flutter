@@ -3,36 +3,61 @@ import 'package:BytebankPersist/models/contact.dart';
 import 'package:BytebankPersist/screens/formulario_de_contatos.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Contacts'),
       ),
-      body: FutureBuilder(
-        future: findAll(),
+      body: FutureBuilder<List<Contact>>(
+        initialData: List(),
+        future: Future.delayed(Duration(seconds: 1)).then((value) => findAll()),
         builder: (context, snapshot) {
-          List<Contact> contacts = snapshot.data;
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [CircularProgressIndicator(), Text('Loading...')],
+                ),
+              );
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              List<Contact> contacts = snapshot.data;
 
-          return ListView.builder(
-            itemCount: contacts.length,
-            itemBuilder: (context, index) {
-              Contact contact = contacts[index];
-              return ContactItem(contact);
-            },
-          );
+              return ListView.builder(
+                itemCount: contacts.length,
+                itemBuilder: (context, index) {
+                  Contact contact = contacts[index];
+                  return ContactItem(contact);
+                },
+              );
+              break;
+          }
+          return Text('Erro desconhecido entre em contato com nosso suporte');
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
               .push(
-            MaterialPageRoute(
-              builder: (context) => ContactForm(),
-            ),
-          )
-              .then((newContact) => debugPrint(newContact.toString()));
+                MaterialPageRoute(
+                  builder: (context) => ContactForm(),
+                ),
+              )
+              .then((value) =>
+                  setState(() => debugPrint('Recarregando lista...')));
         },
         child: Icon(Icons.add),
       ),

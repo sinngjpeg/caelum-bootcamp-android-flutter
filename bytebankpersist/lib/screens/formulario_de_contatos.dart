@@ -1,3 +1,4 @@
+import 'package:BytebankPersist/database/app_database.dart';
 import 'package:BytebankPersist/models/contact.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,7 @@ class ContactForm extends StatelessWidget {
                       final int accountNumer =
                           int.tryParse(accountNumberController.text);
                       final Contact contact = Contact(fullName, accountNumer);
-                      //Salvar no Banco de Dados
-
-                      Navigator.of(context).pop(contact);
+                      save(contact).then((id) => Navigator.pop(context));
                     },
                   ),
                 ),

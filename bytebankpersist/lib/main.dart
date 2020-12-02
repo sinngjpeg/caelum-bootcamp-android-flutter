@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(BytebankPersist());
   findAll().then((listaDeContatos) => debugPrint(listaDeContatos.toString()));
-  save(Contact('Alex', 1020));
+
 }
 
 class BytebankPersist extends StatelessWidget {
