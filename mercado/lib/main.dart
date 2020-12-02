@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
             TextField(),
             RaisedButton(
               child: Text('Cadastrar'),
-              onPressed: () {},
+              onPressed: () {
+                final String nome = _controladorNome.text;
+                final int quantidade = int.tryParse(_controladorQuantidade.text);
+                final double valor = double.tryParse(_controladorValor.text);
+              },
             )
           ],
         ),
