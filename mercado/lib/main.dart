@@ -5,6 +5,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  final TextEditingController _controladorNome = TextEditingController();
+  final TextEditingController _controladorQuantidade = TextEditingController();
+  final TextEditingController _controladorValor = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,16 +31,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class Produto {
-  final String nome;
-  final int quantidade;
-  final double valor;
-
-  Produto(
-    this.nome,
-    this.quantidade,
-    this.valor,
-  );
 }
