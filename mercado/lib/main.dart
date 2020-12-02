@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
            TextField(),
            TextField(),
            TextField(),
+           RaisedButton(
+               child: Text('Cadastrar'),
+               onPressed: () {},
+           )
          ],
        ),
      ),
