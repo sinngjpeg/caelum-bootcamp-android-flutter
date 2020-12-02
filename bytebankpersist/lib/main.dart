@@ -1,12 +1,13 @@
-import 'package:BytebankPersist/database/app_database.dart';
-import 'package:BytebankPersist/models/contact.dart';
+import 'package:BytebankPersist/database/dao/contact_dao.dart';
 import 'package:BytebankPersist/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(BytebankPersist());
-  findAll().then((listaDeContatos) => debugPrint(listaDeContatos.toString()));
-
+  final ContactDao _dao = ContactDao();
+  _dao
+      .findAll()
+      .then((listaDeContatos) => debugPrint(listaDeContatos.toString()));
 }
 
 class BytebankPersist extends StatelessWidget {
