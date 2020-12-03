@@ -13,6 +13,16 @@ class BitBankApp extends StatelessWidget {
         appBar: AppBar(
         title: Text('Dashboard'),
       ),
+          body: Column(
+            children: <Widget>[
+              // Image.asset("name")
+            ],
+          ),
+          
+          
+          
+          
+          
     ));
   }
 }
